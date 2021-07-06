@@ -37,5 +37,6 @@ while (opcion != 9):
     if opcion == 4:
         print("ACELERACION METABOLICA DE LA GLUCOSA\n")
         acel = Functions.Aceleracion(decimal_time, glucosa)
-        print(acel)
+        print(f"Aceleracion minima metabolica de la glucosa: {min(acel)}")
+        print(f"Aceleracion maxima metabolica de la glucosa: {max(acel)}")
 
