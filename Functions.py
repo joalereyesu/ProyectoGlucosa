@@ -3,18 +3,15 @@ from datetime import date, datetime
 import time
 import random
 
-def makeX(horas, time):
+def makeX(horas):
     tiempo = []
-    (h, m) = time.split(':')
-    zero = int(h) + (int(m)/60)
     for hour in horas:
         (h, m, s) = hour.split(':')
-        decimaltime = int(h) + (int(m)/60)
-        result = decimaltime - zero
+        result = int(h) + (int(m)/60)
         tiempo.append(result)
     return tiempo
 
-def getPoints(db, hora_med, di, df):
+def getPoints(db, di, df):
     horas = []
     rand_horas = []
     glucosa = []
@@ -36,7 +33,7 @@ def getPoints(db, hora_med, di, df):
         condicion.append(str(db.loc[element, 'Condición']))
 
     if len(horas) <= 10:
-        puntosx = makeX(horas, hora_med)
+        puntosx = makeX(horas)
         return puntosx, horas, glucosa, condicion
     else: 
         while (len(rand_horas)<10):
@@ -48,16 +45,19 @@ def getPoints(db, hora_med, di, df):
                 rand_horas.append(element_h)
                 rand_glucosa.append(element_g)
                 rand_condicion.append(element_c)
-        puntosx = makeX(rand_horas, hora_med)
+        puntosx = makeX(rand_horas)
         return puntosx, rand_horas, rand_glucosa, rand_condicion
 
 def RazonCambio(x, y):
     n = len(x)
     dx = []
-    dx[0] = (y[1] - y[0])/(x[1] - x[0])
+    val = (y[1] - y[0])/(x[1] - x[0])
+    dx.append(val)
     i = 2
     while i != (n-1):
-        dx[i] = (y[i+1] - y[i-1])/(x[i+1] - x[i-1])
+        val = (y[i+1] - y[i-1])/(x[i+1] - x[i-1])
+        dx.append(val)
         i = i + 1
-    dx[n] =  (y[n] - y[n-1])/(x[n] - x[n-1])
+    val =  (y[n-1] - y[n-2])/(x[n-1] - x[n-2])
+    dx.append(val)
     return dx
