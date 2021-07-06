@@ -2,6 +2,7 @@ import pandas as pd
 from datetime import date, datetime
 import time
 import random
+import math
 
 def makeX(horas):
     tiempo = []
@@ -61,3 +62,17 @@ def RazonCambio(x, y):
     val =  (y[n-1] - y[n-2])/(x[n-1] - x[n-2])
     dx.append(val)
     return dx
+
+def Aceleracion(x, y):
+    dx2 = []
+    n = len(x)
+    val = (y[0] - 2*y[2] + y[3]) / ((x[2] - x[1])**2); 
+    dx2.append(val)
+    i = 1
+    while i != (n-1):
+        val = (y[i-1] - 2*y[i] + y[i+1]) / ((x[i] - x[i-1])**2)
+        dx2.append(val)
+        i = i + 1
+    val = (y[n-3] - 2*y[n-2] + y[n-1]) / ((x[n-1] - x[n-2])**2)
+    dx2.append(val)
+    return dx2

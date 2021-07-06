@@ -28,7 +28,6 @@ while (opcion != 9):
     if opcion == 3:
         print("TABLA DE METABOLIZACION DE GLUCOSA\n")
         razon_cambio = Functions.RazonCambio(decimal_time, glucosa)
-        print(razon_cambio)
         print("No.      Tiempo      Glucosa      Razon de Cambio       Condicion\n")
         print("---------------------------------------------------------------------")
         for i in range(len(razon_cambio)):
@@ -36,5 +35,7 @@ while (opcion != 9):
         print("---------------------------------------------------------------------")
     
     if opcion == 4:
-        
+        print("ACELERACION METABOLICA DE LA GLUCOSA\n")
+        acel = Functions.Aceleracion(decimal_time, glucosa)
+        print(acel)
 
