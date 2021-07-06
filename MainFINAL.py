@@ -19,17 +19,22 @@ while (opcion != 9):
     if (opcion == 1):
         fecha_inicial = input("Ingrese la fecha de inicio de la muestra (yyyy-mm-dd): ")
         fecha_final = input("Ingrese la fecha final de la muestra (yyyy-mm-dd): ")
-        (decimal_time, time, glucosa, condicion) = Functions.getPoints(database, hora_med, fecha_inicial, fecha_final)
+        (decimal_time, time, glucosa, condicion) = Functions.getPoints(database, fecha_inicial, fecha_final)
+        print(decimal_time)
+        print(time)
+        print(glucosa)
+        print(condicion)
             
     if opcion == 3:
         print("TABLA DE METABOLIZACION DE GLUCOSA\n")
         razon_cambio = Functions.RazonCambio(decimal_time, glucosa)
-        i = 1
+        print(razon_cambio)
         print("No.      Tiempo      Glucosa      Razon de Cambio       Condicion\n")
         print("---------------------------------------------------------------------")
-        while i != (len(razon_cambio) + 1):
+        for i in range(len(razon_cambio)):
             print(f"{i}      {time[i]}      {glucosa[i]}      {razon_cambio[i]}      {condicion[i]}")
-            i = i + 1
         print("---------------------------------------------------------------------")
+    
+    if opcion == 4:
         
 

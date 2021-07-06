@@ -41,7 +41,7 @@ def getPoints(db, di, df):
             element_h = horas[rand_num]
             element_g = glucosa[rand_num]
             element_c = condicion[rand_num]
-            if element not in rand_horas:
+            if element_h not in rand_horas:
                 rand_horas.append(element_h)
                 rand_glucosa.append(element_g)
                 rand_condicion.append(element_c)
@@ -53,7 +53,7 @@ def RazonCambio(x, y):
     dx = []
     val = (y[1] - y[0])/(x[1] - x[0])
     dx.append(val)
-    i = 2
+    i = 1
     while i != (n-1):
         val = (y[i+1] - y[i-1])/(x[i+1] - x[i-1])
         dx.append(val)
