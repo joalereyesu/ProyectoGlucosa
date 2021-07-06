@@ -2,6 +2,9 @@ import pandas as pd
 import os
 from datetime import datetime
 import Functions
+import matplotlib.pyplot as plt
+import numpy
+import pylab
 
 db = pd.read_excel('Glucosa-Project.xlsx')
 database = db.dropna()
@@ -25,6 +28,21 @@ while (opcion != 9):
         print(glucosa)
         print(condicion)
             
+    if (opcion == 2):
+        op=int(input('¿Cómo desea visualizar la gráfica?\1.Puntos\n2.Curva generada por Polinomio\n'))
+        if op == 1:
+            plt.scatter(decimal_time, glucosa)
+            z = numpy.polyfit(decimal_time, glucosa, 1)
+            p = numpy.poly1d(z)
+            pylab.plot(decimal_time,p(decimal_time),"r--")
+            plt.title('Niveles de Glucosa en Base al Tiempo')
+            plt.xlabel('Horas en decimales')
+            plt.ylabel('Niveles de glucosa')
+            plt.show()
+        
+
+
+
     if opcion == 3:
         print("TABLA DE METABOLIZACION DE GLUCOSA\n")
         razon_cambio = Functions.RazonCambio(decimal_time, glucosa)
