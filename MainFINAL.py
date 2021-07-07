@@ -37,24 +37,7 @@ while (opcion != 9):
             plt.xlabel('Horas en decimales')
             plt.ylabel('Niveles de glucosa')
             plt.show()
-<<<<<<< Updated upstream
-        if op == 2:
-            yinters=[]
-            for i in range(len(decimal_time)):
-                Yinter=Functions.LagrangePol(decimal_time, glucosa, decimal_time[i])
-                yinters.append(Yinter)
-            print(yinters)
-            plt.plot(decimal_time, yinters)
-            plt.title('Niveles de Glucosa en Base al Tiempo')
-            plt.xlabel('Horas en decimales')
-            plt.ylabel('Niveles de glucosa')
-            plt.show()
-            
-            
-
-=======
         
->>>>>>> Stashed changes
 
     if opcion == 3:
         print("TABLA DE METABOLIZACION DE GLUCOSA\n")

@@ -80,7 +80,6 @@ def Aceleracion(x, y):
     dx2.append(val)
     return dx2
 
-<<<<<<< Updated upstream
 
 def LagrangePol(x,y,xint):
     sum=0
@@ -93,7 +92,7 @@ def LagrangePol(x,y,xint):
         sum+=producto
     Yinter=sum
     return Yinter
-=======
+
 def RegLin(x, y):
     n = len(x)
     x2 = []
@@ -119,4 +118,3 @@ def RegLin(x, y):
     plt.plot(xp, yp)
     plt.show()
     return r2
->>>>>>> Stashed changes
