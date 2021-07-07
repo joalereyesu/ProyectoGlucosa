@@ -3,6 +3,9 @@ from datetime import date, datetime
 import time
 import random
 import math
+import matplotlib.pyplot as plt
+import numpy
+import pylab
 
 def makeX(horas):
     tiempo = []
@@ -77,6 +80,7 @@ def Aceleracion(x, y):
     dx2.append(val)
     return dx2
 
+<<<<<<< Updated upstream
 
 def LagrangePol(x,y,xint):
     sum=0
@@ -89,3 +93,30 @@ def LagrangePol(x,y,xint):
         sum+=producto
     Yinter=sum
     return Yinter
+=======
+def RegLin(x, y):
+    n = len(x)
+    x2 = []
+    xy = []
+    y2 = []
+    if len(y) != n:
+        print("Debe haber la misma canitdad de valores para 'x' y 'y'")
+    sx = sum(x)
+    sy = sum(y)
+    for i in range(len(x)):
+        x2.append(x[i]*x[i])
+        xy.append(x[i]*y[i])
+        y2.append(y[i]*y[i])
+    sx2 = sum(x2)
+    sxy = sum(xy)
+    sy2 = sum(y2)
+    pendiente = (n*sxy - sx*sy)/(n*sx2 - sx**2)
+    intery = sy/n - pendiente * sx/n
+    r2 = ((n*sxy - sx*sy)/math.sqrt(n * sx2 - sx**2)/math.sqrt(n*sy2 - sy**2))**2
+    xp = numpy.linspace(min(x), max(x), 2)
+    yp = pendiente*xp+intery
+    plt.scatter(x, y)
+    plt.plot(xp, yp)
+    plt.show()
+    return r2
+>>>>>>> Stashed changes

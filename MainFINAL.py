@@ -24,10 +24,8 @@ while (opcion != 9):
         fecha_final = input("Ingrese la fecha final de la muestra (yyyy-mm-dd): ")
         (decimal_time, time, glucosa, condicion) = Functions.getPoints(database, fecha_inicial, fecha_final)
         print(decimal_time)
-        print(time)
         print(glucosa)
-        print(condicion)
-            
+
     if (opcion == 2):
         op=int(input('¿Cómo desea visualizar la gráfica?\n1.Puntos\n2.Curva generada por Polinomio\n'))
         if op == 1:
@@ -39,6 +37,7 @@ while (opcion != 9):
             plt.xlabel('Horas en decimales')
             plt.ylabel('Niveles de glucosa')
             plt.show()
+<<<<<<< Updated upstream
         if op == 2:
             yinters=[]
             for i in range(len(decimal_time)):
@@ -53,6 +52,9 @@ while (opcion != 9):
             
             
 
+=======
+        
+>>>>>>> Stashed changes
 
     if opcion == 3:
         print("TABLA DE METABOLIZACION DE GLUCOSA\n")
@@ -68,4 +70,9 @@ while (opcion != 9):
         acel = Functions.Aceleracion(decimal_time, glucosa)
         print(f"Aceleracion minima metabolica de la glucosa: {min(acel)}")
         print(f"Aceleracion maxima metabolica de la glucosa: {max(acel)}")
+
+    if opcion == 7:
+        print("TENDENCIAS\n")
+        r2 = Functions.RegLin(decimal_time, glucosa)
+        print(f"El coeficiente de determinacion: {r2}")
 
