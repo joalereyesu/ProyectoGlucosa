@@ -3,7 +3,7 @@ import os
 from datetime import datetime
 import Functions
 import matplotlib.pyplot as plt
-import numpy
+import numpy as np, numpy
 import pylab
 
 db = pd.read_excel('Glucosa-Project.xlsx')
@@ -37,6 +37,17 @@ while (opcion != 9):
             plt.xlabel('Horas en decimales')
             plt.ylabel('Niveles de glucosa')
             plt.show()
+        if op == 2:
+            yinters=[]
+            for i in range (len(decimal_time)): 
+                yinter=Functions.LagrangePol(decimal_time,glucosa,decimal_time[i])
+                yinters.append(yinter)
+            plt.plot(decimal_time, yinters)
+            plt.title('Niveles de Glucosa en Base al Tiempo')
+            plt.xlabel('Horas en decimales')
+            plt.ylabel('Niveles de glucosa')
+            plt.show()
+
         
 
     if opcion == 3:
@@ -65,5 +76,24 @@ while (opcion != 9):
         print("TENDENCIAS\n")
         r2 = Functions.RegLin(decimal_time, glucosa)
         print(f"El coeficiente de determinacion: {r2}") 
+
+    if opcion == 8:
+        vals=np.sort(glucosa)
+        gluc=np.array(vals) 
+        media=np.mean(gluc)
+        mediana=np.median(gluc)
+        maximo=max(gluc)
+        minimo=min(gluc)
+        desviacion=np.std(gluc)
+        print('  MEDIA         MEDIANA           VALOR MÁXIMO         VALOR MÍNIMO      DESVIACIÓN ESTÁNDAR\n')
+        print('______________________________________________________________________________________________\n')
+        print(f'  {media}          {mediana}             {maximo}               {minimo}           {desviacion}\n')
+        print('______________________________________________________________________________________________\n')
+        plt.hist(vals, bins=len(vals-1))
+        plt.xlabel('Glucosa')
+        plt.ylabel('Frecuencia')
+        plt.show()
+
+
 
 
