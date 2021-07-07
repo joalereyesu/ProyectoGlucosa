@@ -54,8 +54,16 @@ while (opcion != 9):
         print(f"Aceleracion minima metabolica de la glucosa: {min(acel)}")
         print(f"Aceleracion maxima metabolica de la glucosa: {max(acel)}")
 
+    if opcion == 5:
+        print('GLUCOSA PROMEDIO POR LAS FECHAS ESCOGIDAS\n')
+        n=1/(len(decimal_time)-2)
+        a=Functions.Trapecio(decimal_time, glucosa)
+        promedio=n*a
+        print(f"La glucosa promedio en esas fechas es: {promedio}")
+
     if opcion == 7:
         print("TENDENCIAS\n")
         r2 = Functions.RegLin(decimal_time, glucosa)
-        print(f"El coeficiente de determinacion: {r2}")
+        print(f"El coeficiente de determinacion: {r2}") 
+
 

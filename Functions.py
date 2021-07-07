@@ -118,3 +118,13 @@ def RegLin(x, y):
     plt.plot(xp, yp)
     plt.show()
     return r2
+
+def Trapecio(x,y):
+    l=len(x)
+    h=x[2]-x[1]
+    I=(0.5*(y[1]+y[2]))*h
+    i=1
+    for i in range(l-1):
+        h=x[i+1] - x[i]
+        I+=(0.5*y[i]+y[i+1])*h
+    return I
