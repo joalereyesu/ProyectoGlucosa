@@ -29,7 +29,7 @@ while (opcion != 9):
         print(condicion)
             
     if (opcion == 2):
-        op=int(input('¿Cómo desea visualizar la gráfica?\1.Puntos\n2.Curva generada por Polinomio\n'))
+        op=int(input('¿Cómo desea visualizar la gráfica?\n1.Puntos\n2.Curva generada por Polinomio\n'))
         if op == 1:
             plt.scatter(decimal_time, glucosa)
             z = numpy.polyfit(decimal_time, glucosa, 1)
@@ -39,8 +39,19 @@ while (opcion != 9):
             plt.xlabel('Horas en decimales')
             plt.ylabel('Niveles de glucosa')
             plt.show()
-        
-
+        if op == 2:
+            yinters=[]
+            for i in range(len(decimal_time)):
+                Yinter=Functions.LagrangePol(decimal_time, glucosa, decimal_time[i])
+                yinters.append(Yinter)
+            print(yinters)
+            plt.plot(decimal_time, yinters)
+            plt.title('Niveles de Glucosa en Base al Tiempo')
+            plt.xlabel('Horas en decimales')
+            plt.ylabel('Niveles de glucosa')
+            plt.show()
+            
+            
 
 
     if opcion == 3:

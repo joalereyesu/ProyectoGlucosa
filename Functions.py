@@ -76,3 +76,16 @@ def Aceleracion(x, y):
     val = (y[n-3] - 2*y[n-2] + y[n-1]) / ((x[n-1] - x[n-2])**2)
     dx2.append(val)
     return dx2
+
+
+def LagrangePol(x,y,xint):
+    sum=0
+    n=len(x)
+    for i in range(n):
+        producto=y[i]
+        for j in range(n):
+            if i !=j:
+                producto*=((xint-x[j])/(x[i]-x[j]))
+        sum+=producto
+    Yinter=sum
+    return Yinter
