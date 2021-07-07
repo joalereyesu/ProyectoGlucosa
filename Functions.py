@@ -22,6 +22,14 @@ def makeTime(decimal_time):
     minutes = (decimal_time*60) % 60
     return hours, minutes
 
+def checkforduplicates(lista, lista2):
+    res = []
+    res2 = []
+    for i in range(len(lista)):
+        if lista[i] not in res:
+            res.append(lista[i])
+            res2.append(lista2[i])
+    return res, res2
 
 def getPoints(db, di, df):
     horas = []

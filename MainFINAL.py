@@ -86,10 +86,9 @@ while (opcion != 9):
     
     if opcion == 6: #Se busca aproximar a qué hora tendrá el nivel de glucosa ingresado
         inp_gluc = int(input("Ingrese el valor especifico de nivel de glucosa: "))
-        print(glucosa)
-        print(decimal_time)
-        tiempo_calc = Functions.LagrangePol(glucosa, decimal_time, inp_gluc) #Se utiliza la función de Lagrange, mandando el arreglo de glucosa y el valor de la glucosa que se busca
-        (h, m) = Functions.makeTime(tiempo_calc) #Se pasa de hora decimal a formato de horas (HH:MM)
+        (mod_gluc, mod_time) = Functions.checkforduplicates(glucosa, decima_time)
+        tiempo_calc = Functions.LagrangePol(mod_gluc, mod_time, inp_gluc)
+        (h, m) = Functions.makeTime(tiempo_calc)
         print("Hora: %d:%02d" % (h, m))
         enter = input("Presione enter para continuar: ")
 
