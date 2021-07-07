@@ -34,6 +34,8 @@ def getPoints(db, di, df):
     rand_glucosa = []
     condicion = []
     rand_condicion = []
+    fechas = []
+    rand_fechas = []
     puntosx = []
     datei = datetime.strptime(di, '%Y-%m-%d')
     datef = datetime.strptime(df, '%Y-%m-%d')
@@ -47,31 +49,36 @@ def getPoints(db, di, df):
         horas.append(str(db.loc[element, 'Hora']))
         glucosa.append(int(db.loc[element, 'mg/dL']))
         condicion.append(str(db.loc[element, 'Condición']))
+        fechas.append(str(db.loc[element, 'Fecha']))
 
 
     if len(horas) <= 10:
         horas_updated = []
         glucosa_updated = []
         condicion_updated = []
+        fechas_updated = []
         for i in range(len(horas)):
             if horas[i] not in horas_updated:
                 horas_updated.append(horas[i])
                 glucosa_updated.append(glucosa[i])
                 condicion_updated.append(condicion[i])
+                fechas_updated.append(fechas[i])
         puntosx = makeX(horas_updated)
-        return puntosx, horas_updated, glucosa_updated, condicion_updated
+        return puntosx, horas_updated, glucosa_updated, condicion_updated, fechas_updated 
     else: 
         while (len(rand_horas)<10):
             rand_num = random.randint(0, (len(horas)-1))
             element_h = horas[rand_num]
             element_g = glucosa[rand_num]
             element_c = condicion[rand_num]
+            element_f = fechas[rand_num]
             if element_h not in rand_horas:
                 rand_horas.append(element_h)
                 rand_glucosa.append(element_g)
                 rand_condicion.append(element_c)
+                rand_fechas.append(element_f)
         puntosx = makeX(rand_horas)
-        return puntosx, rand_horas, rand_glucosa, rand_condicion
+        return puntosx, rand_horas, rand_glucosa, rand_condicion, rand_fechas
 
 def RazonCambio(x, y):
     n = len(x)
