@@ -15,6 +15,18 @@ def makeX(horas):
         tiempo.append(result)
     return tiempo
 
+def makeTime(decimal_time):
+    hours = int(decimal_time)
+    minutes = (decimal_time*60) % 60
+    return hours, minutes
+
+def checkforduplicates(lista):
+    res = []
+    for i in lista:
+        if i not in res:
+            res.append(i)
+    return res
+
 def getPoints(db, di, df):
     horas = []
     rand_horas = []
@@ -36,9 +48,18 @@ def getPoints(db, di, df):
         glucosa.append(int(db.loc[element, 'mg/dL']))
         condicion.append(str(db.loc[element, 'Condición']))
 
+
     if len(horas) <= 10:
-        puntosx = makeX(horas)
-        return puntosx, horas, glucosa, condicion
+        horas_updated = []
+        glucosa_updated = []
+        condicion_updated = []
+        for i in range(len(horas)):
+            if horas[i] not in horas_updated:
+                horas_updated.append(horas[i])
+                glucosa_updated.append(glucosa[i])
+                condicion_updated.append(condicion[i])
+        puntosx = makeX(horas_updated)
+        return puntosx, horas_updated, glucosa_updated, condicion_updated
     else: 
         while (len(rand_horas)<10):
             rand_num = random.randint(0, (len(horas)-1))

@@ -17,7 +17,7 @@ glucosa = []
 condicion = []
 
 while (opcion != 9):
-    print("MENU\n\n 1. Rango de Analisis\n 2. Graficas\n 3. Tabla de metabolizacion de Glucosa\n 4. Aceleracion metabolica de la glucos \n 5. Glucosa Promedio\n 6. Glucosa-meta\n 7. Tendencia\n 8. Resumen Estadistico\n")
+    print("MENU\n\n 1. Rango de Analisis\n 2. Graficas\n 3. Tabla de metabolizacion de Glucosa\n 4. Aceleracion metabolica de la glucos \n 5. Glucosa Promedio\n 6. Glucosa-meta\n 7. Tendencia\n 8. Resumen Estadistico\n 9. Salir")
     opcion = int(input("Ingrese una opcion: "))
     if (opcion == 1):
         fecha_inicial = input("Ingrese la fecha de inicio de la muestra (yyyy-mm-dd): ")
@@ -69,6 +69,11 @@ while (opcion != 9):
         a=Functions.Trapecio(decimal_time, glucosa)
         promedio=n*a
         print(f"La glucosa promedio en esas fechas es: {promedio}")
+    if opcion == 6:
+        inp_gluc = int(input("Ingrese el valor especifico de nivel de glucosa: "))
+        tiempo_calc = Functions.LagrangePol(glucosa, decimal_time, inp_gluc)
+        (h, m) = Functions.makeTime(tiempo_calc)
+        print("Hora: %d:%02d" % (h, m))
 
     if opcion == 7:
         print("TENDENCIAS\n")
