@@ -23,8 +23,7 @@ while (opcion != 9):
         fecha_inicial = input("Ingrese la fecha de inicio de la muestra (yyyy-mm-dd): ")
         fecha_final = input("Ingrese la fecha final de la muestra (yyyy-mm-dd): ")
         (decimal_time, time, glucosa, condicion) = Functions.getPoints(database, fecha_inicial, fecha_final)
-        print(decimal_time)
-        print(glucosa)
+
 
     if (opcion == 2):
         op=int(input('¿Cómo desea visualizar la gráfica?\n1.Puntos\n2.Curva generada por Polinomio\n'))
@@ -49,7 +48,6 @@ while (opcion != 9):
             plt.show()
 
         
-
     if opcion == 3:
         print("TABLA DE METABOLIZACION DE GLUCOSA\n")
         razon_cambio = Functions.RazonCambio(decimal_time, glucosa)
