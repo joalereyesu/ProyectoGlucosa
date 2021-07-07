@@ -37,6 +37,8 @@ def getPoints(db, di, df):
     fechas = []
     rand_fechas = []
     puntosx = []
+    inicio=0
+    final=0
     datei = datetime.strptime(di, '%Y-%m-%d')
     datef = datetime.strptime(df, '%Y-%m-%d')
     for index, row in db.iterrows():
