@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import numpy
 import pylab
 
+#Todas las horas las pasa a formato decimal
 def makeX(horas):
     tiempo = []
     for hour in horas:
@@ -15,17 +16,12 @@ def makeX(horas):
         tiempo.append(result)
     return tiempo
 
+#Pasa de decimal a formato de hrs
 def makeTime(decimal_time):
     hours = int(decimal_time)
     minutes = (decimal_time*60) % 60
     return hours, minutes
 
-def checkforduplicates(lista):
-    res = []
-    for i in lista:
-        if i not in res:
-            res.append(i)
-    return res
 
 def getPoints(db, di, df):
     horas = []
@@ -39,49 +35,55 @@ def getPoints(db, di, df):
     puntosx = []
     inicio=0
     final=0
-    datei = datetime.strptime(di, '%Y-%m-%d')
-    datef = datetime.strptime(df, '%Y-%m-%d')
-    for index, row in db.iterrows():
-        if row['Fecha'] == datei:
-            inicio = index
-        if row['Fecha'] == datef:
-            final = index
+    datei = datetime.strptime(di, '%Y-%m-%d') #Se pasa la info a formato DateTime
+    datef = datetime.strptime(df, '%Y-%m-%d') #Se pasa la info a formato DateTime
+    for index, row in db.iterrows(): #se itera la base de datos
+        if row['Fecha'] == datei: #Se verifica que la fecha inicial esté en la columna 'Fecha'
+            inicio = index #Es la posición inicial del vector
+        if row['Fecha'] == datef: #Se verifica que la fecha final esté en la columna 'Fecha'
+            final = index #Es la posición final del vector
 
-    for element in range(inicio, final):
-        horas.append(str(db.loc[element, 'Hora']))
+    for element in range(inicio, final): #itera entre la posición inicial y la final
+        #Se crean diferentes vectores para las variables
+        horas.append(str(db.loc[element, 'Hora'])) 
         glucosa.append(int(db.loc[element, 'mg/dL']))
         condicion.append(str(db.loc[element, 'Condición']))
         fechas.append(str(db.loc[element, 'Fecha']))
 
 
-    if len(horas) <= 10:
+    if len(horas) <= 10: #Verifica que el largo del vector sea <= 10
+        #se crean nuevos vectores para las variables
         horas_updated = []
         glucosa_updated = []
         condicion_updated = []
         fechas_updated = []
-        for i in range(len(horas)):
-            if horas[i] not in horas_updated:
+        for i in range(len(horas)): #itera el vector horas 
+            if horas[i] not in horas_updated: #Verifica que no se repita ningún valor
+                #Se actualizan todas las variables para que ninguna se repita
                 horas_updated.append(horas[i])
                 glucosa_updated.append(glucosa[i])
                 condicion_updated.append(condicion[i])
                 fechas_updated.append(fechas[i])
-        puntosx = makeX(horas_updated)
+        puntosx = makeX(horas_updated) #convierte las horas a formato decimal
         return puntosx, horas_updated, glucosa_updated, condicion_updated, fechas_updated 
-    else: 
+    else: #Aquí se usa cuando el largo de la muestra es mayor a 10
         while (len(rand_horas)<10):
-            rand_num = random.randint(0, (len(horas)-1))
-            element_h = horas[rand_num]
+            rand_num = random.randint(0, (len(horas)-1)) #Se crea un número random
+            #Devuelve un elemento random de cada vector
+            element_h = horas[rand_num] 
             element_g = glucosa[rand_num]
             element_c = condicion[rand_num]
             element_f = fechas[rand_num]
-            if element_h not in rand_horas:
+            if element_h not in rand_horas: #Verifica que no se repita ningún valor
+                #Se guardan todas las variables random en vectores
                 rand_horas.append(element_h)
                 rand_glucosa.append(element_g)
                 rand_condicion.append(element_c)
                 rand_fechas.append(element_f)
-        puntosx = makeX(rand_horas)
+        puntosx = makeX(rand_horas) #Convierte las horas a formato decimal
         return puntosx, rand_horas, rand_glucosa, rand_condicion, rand_fechas
 
+#Función de primera derivada
 def RazonCambio(x, y):
     n = len(x)
     dx = []
@@ -96,6 +98,7 @@ def RazonCambio(x, y):
     dx.append(val)
     return dx
 
+#Función de la segunda derivada
 def Aceleracion(x, y):
     dx2 = []
     n = len(x)
@@ -110,7 +113,7 @@ def Aceleracion(x, y):
     dx2.append(val)
     return dx2
 
-
+#Polinomio interpolante utilizando función de Lagrange (lo hicimos en clase)
 def LagrangePol(x,y,xint):
     sum=0
     n=len(x)
@@ -123,6 +126,7 @@ def LagrangePol(x,y,xint):
     Yinter=sum
     return Yinter
 
+#Regresión lineal (lo hicimos en clase)
 def RegLin(x, y):
     n = len(x)
     x2 = []
@@ -149,6 +153,7 @@ def RegLin(x, y):
     plt.show()
     return r2
 
+#Calcula la integral por medio del método del Trapecio (lo hicimos en clase)
 def Trapecio(x,y):
     l=len(x)
     h=x[2]-x[1]
